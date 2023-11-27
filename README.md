@@ -1,4 +1,7 @@
 # apollo-server
+Apollo server scans the specified repos from github account with the help of security token. It supports two scenarios for showing detail.
+1. Repo List
+2. Repo Detail
 
 ## Prerequisites
 1. You should have clone of `https://github.com/roma8389/javascript` repo in your github account.
