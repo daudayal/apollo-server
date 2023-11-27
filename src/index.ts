@@ -1,9 +1,9 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
-import { ReposDataSource } from "./datasources.js";
-import resolvers from "./resolvers/index.js";
 import { readFileSync } from "fs";
-import { Github } from "./services/github.js";
+import { ReposDataSource } from "./datasources";
+import resolvers from "./resolvers/index";
+import { GithubService } from "./services/github-service";
 
 const typeDefs = readFileSync("./schema.graphql", { encoding: "utf-8" });
 
@@ -24,7 +24,7 @@ async function init() {
         context: async ({ req, res }) => {
             return {
                 dataSources: {
-                    repoAPI: new ReposDataSource(new Github()),
+                    repoAPI: new ReposDataSource(new GithubService()),
                 },
                 authToken: req.headers.authorization
             };

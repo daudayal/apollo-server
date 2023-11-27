@@ -1,10 +1,10 @@
-import { IGithub } from "./github-interface";
 import { Octokit } from "@octokit/rest";
 import fetch from "node-fetch";
+import { IGithub } from "./github-interface";
 import { Row } from "../interfaces/row";
 import { BATCH_SIZE } from "../constants";
 
-export class Github implements IGithub {
+export class GithubService implements IGithub {
   async scanRepos(repos: Row[], authToken: string): Promise<Row[]> {
     try {
       const octokit = new Octokit({
@@ -47,7 +47,7 @@ export class Github implements IGithub {
     }
   }
 
-  async scanRepo(octokit: Octokit, repo: Row): Promise<Row> {
+  private async scanRepo(octokit: Octokit, repo: Row): Promise<Row> {
     try {
       console.log("get repo info for ", repo.name)
       const repoInfo = await octokit.request('GET /repos/{owner}/{repo}', {
