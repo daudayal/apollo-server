@@ -1,0 +1,33 @@
+interface Repo{
+  name: String
+  size: Int
+  owner: String
+}
+
+type WebHook{
+  name: String
+  events: [String]
+  created_at: String
+  updated_at: String
+}
+
+type RepoIntro implements Repo{
+  name: String
+  size: Int
+  owner: String
+}
+
+type RepoDetails implements Repo{
+  name: String
+  size: Int
+  owner: String
+  public: Boolean
+  fileCount: Int
+  ymlContent: String
+  activeWebHooks: [WebHook!]
+}
+
+type Query {
+  listRepos: [RepoIntro]
+  repoDetails: [RepoDetails]
+}
